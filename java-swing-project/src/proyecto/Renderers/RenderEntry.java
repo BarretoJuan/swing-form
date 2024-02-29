@@ -7,16 +7,12 @@ import java.awt.FlowLayout;
 import javax.swing.JTextField;
 
 import proyecto.Colors;
+import proyecto.SetImageLabel;
 import proyecto.ShowHint;
 
 import javax.swing.JPanel;
 import javax.swing.InputVerifier;
 import javax.swing.JLabel;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
-import java.awt.Image;
-import java.net.URL;
 import proyecto.Uppercase;
 import proyecto.Verify;
 
@@ -53,18 +49,9 @@ public class RenderEntry {
 
         JLabel imageLabel = new JLabel();
         imageLabel.setSize(30,30);
+        new SetImageLabel().SetIconLabel(imageLabel, url);
 
-        try {
-            URL imageUrl = getClass().getResource(url); 
-            if (imageUrl == null) {
-                throw new Exception("Image not found: " + imageUrl);
-            }
-            Image image = ImageIO.read(imageUrl);
-            Image scaledImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH); 
-            imageLabel.setIcon(new ImageIcon(scaledImage));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+  
         imageLabel.setHorizontalAlignment(JLabel.RIGHT);
         CompLabel.setHorizontalAlignment(JLabel.RIGHT);
         

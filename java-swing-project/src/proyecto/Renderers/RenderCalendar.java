@@ -7,17 +7,12 @@ import javax.swing.UIManager;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.plaf.basic.CalendarHeaderHandler;
 import org.jdesktop.swingx.plaf.basic.SpinningCalendarHeaderHandler;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.InputVerifier;
-
 import proyecto.Colors;
+import proyecto.SetImageLabel;
 import proyecto.ShowHint;
-import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -52,22 +47,10 @@ public class RenderCalendar {
         ShowHint.setHint("Seleccione la fecha de nacimiento",picker.getEditor());
         picker.setPreferredSize(new Dimension(250, 30));//After using the setEnabled(false) method, the FormattedTextField is visually disabled too, rendering the text in a transparent, blue-ish tone, this method overrides that color, making it look as if it wasn't disabled
         picker.getEditor().setBackground(Colors.formbg);
-
-        
+ 
         JLabel imageLabel = new JLabel();
         imageLabel.setSize(30,30);
-
-        try {
-            URL imageUrl = getClass().getResource(url); 
-            if (imageUrl == null) {
-                throw new Exception("Image not found: " + imageUrl);
-            }
-            Image image = ImageIO.read(imageUrl);
-            Image scaledImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH); 
-            imageLabel.setIcon(new ImageIcon(scaledImage));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new SetImageLabel().SetIconLabel(imageLabel,url);
 
         // Add the components to the panel
         RowPanel.add(CompLabel);

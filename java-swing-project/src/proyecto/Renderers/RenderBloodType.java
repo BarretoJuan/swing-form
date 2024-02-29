@@ -1,13 +1,14 @@
 package proyecto.Renderers;
 import proyecto.Colors;
+import proyecto.SetImageLabel;
+
 import javax.swing.JPanel;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.*;
-import java.net.URL;
+
 
 public class RenderBloodType {
 
@@ -29,23 +30,10 @@ public class RenderBloodType {
         bloodMenu.setPreferredSize(new Dimension(250,30));
         bloodMenu.setSelectedItem(null);
         
-
-
         JLabel imageLabel = new JLabel();
         imageLabel.setSize(30,30);
-
-        try {
-            URL imageUrl = getClass().getResource(url); 
-            if (imageUrl == null) {
-                throw new Exception("Image not found: " + imageUrl);
-            }
-            Image image = ImageIO.read(imageUrl);
-            Image scaledImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH); 
-            imageLabel.setIcon(new ImageIcon(scaledImage));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        new SetImageLabel().SetIconLabel(imageLabel,url);
+       
         // Add the components to the panel
         RowPanel.add(CompLabel);
         RowPanel.add(bloodMenu);
